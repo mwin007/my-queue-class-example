@@ -1,0 +1,1 @@
+# my-queue-class-example
