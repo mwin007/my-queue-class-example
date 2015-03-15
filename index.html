@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+body {
+    background-color: rgb(109 ,171, 255);
+}
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+/*$(document).ready(function(){
+    $('.button').click(function(){
+        var clickBtnValue = $(this).val();
+        var fileurl = 'StreamColors.php',
+        data =  {'action': clickBtnValue};
+        $.post(fileurl, data, function (response) {
+            alert("action performed successfully");
+        });
+    });
+});*/
+
+function startLoop() {
+  setInterval ("loadXMLDoc()", 3000);
+}
+
+function setBgColor(response) {
+    var arr = JSON.parse(response);
+    alert (response);
+      document.body.style.backgroundColor = arr[0].bg;
+    }
+
+function loadXMLDoc()
+{
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    //document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+    document.body.style.backgroundColor = xmlhttp.responseText;
+    //var rgb = xmlhttp.responseText;
+    //document.write (xmlhttp.responseText);
+    //var rgb = xmlhttp.responseText;
+    //setBgColor(xmlhttp.responseText);
+    //setBgColor(xmlhttp.responseText);
+
+    }
+  }
+xmlhttp.open("GET","result.json",true);
+xmlhttp.send();
+}
+</script>
+</head>
+<body>
+<button type="button" onclick="startLoop()" >Change Color</button>
+
+</body>
+</html>
